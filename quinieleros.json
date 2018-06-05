@@ -1,0 +1,82 @@
+[
+  {
+    "Name": "Luis Sandoval",
+    "teams": [ "South Korea", "Mexico" ],
+    "points": 0
+  },
+  {
+    "Name": "David Bolaños",
+    "teams": [ "Germany", "Sweden" ],
+    "points": 0
+  },
+  {
+    "Name": "Omar Zatarain",
+    "teams": [ "Morocco", "Iran" ],
+    "points": 0
+  },
+  {
+    "Name": "Ernesto Lopez",
+    "teams": [ "Portugal", "Spain" ],
+    "points": 0
+  },
+  {
+    "Name": "Jose Nieves",
+    "teams": [ "Japan", "Poland" ],
+    "points": 0
+  },
+  {
+    "Name": "Jesus Solis",
+    "teams": [ "Senegal", "Colombia" ],
+    "points": 11
+  },
+  {
+    "Name": "Juan Antonio",
+    "teams": [ "Argentina", "Iceland" ],
+    "points": 9
+  },
+  {
+    "Name": "Gerardo Ortiz",
+    "teams": [ "Croatia", "Nigeria" ],
+    "points": 0
+  },
+  {
+    "Name": "Omar Osuna",
+    "teams": [ "Egypt", "Uruguay" ],
+    "points": 55
+  },
+  {
+    "Name": "Hector Valdivia",
+    "teams": [ "Russia", "Saudi Arabia" ],
+    "points": 99
+  },
+  {
+    "Name": "Luis Gonzalez",
+    "teams": [ "Australia", "Peru" ],
+    "points": 0
+  },
+  {
+    "Name": "Jose Manuel",
+    "teams": [ "Denmark", "France" ],
+    "points": 0
+  },
+  {
+    "Name": "Carlos Lopez",
+    "teams": [ "Belgium", "Panama" ],
+    "points": 0
+  },
+  {
+    "Name": "Gabriel Herrera",
+    "teams": [ "Tunisia", "England" ],
+    "points": 0
+  },
+  {
+    "Name": "Samara de la Torre",
+    "teams": [ "Costa Rica", "Serbia" ],
+    "points": 0
+  },
+  {
+    "Name": "Rakesh",
+    "teams": [ "Brazil", "Switzerland" ],
+    "points": 0
+  },
+]

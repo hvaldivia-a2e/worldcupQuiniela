@@ -24,6 +24,8 @@ namespace WorldCupQuiniela.Usercontrols
         public string Name { get; set; }
         public int Points { get; set; }
         public string[] Teams { get; set; }
+        public string team0Record { get; set; }
+        public string team1Record { get; set; }
 
         public Playercontrol()
         {
@@ -49,6 +51,9 @@ namespace WorldCupQuiniela.Usercontrols
             image.UriSource = new Uri(System.IO.Path.GetFullPath(string.Format("./world-cup-flags/{0}.gif", Teams[1])));
             image.EndInit();
             imgTeam2.Source = image;
+
+            Team0Record.Content = team0Record;
+            Team1Record.Content = team1Record;
         }
     }
 }

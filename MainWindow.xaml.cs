@@ -103,7 +103,9 @@ namespace WorldCupQuiniela {
         private void RefreshRanking() {
             CalculatePoints();
             var ordered = quinieleros.OrderByDescending(q => q.points);
-            foreach(Quinielero q in ordered) quinielerosGrid.Children.Add(new Playercontrol() { Name = q.Name, Points = q.points, Teams = q.teams.ToArray()});
+            quinielerosGrid.Children.Clear();
+            foreach (Quinielero q in ordered) quinielerosGrid.Children.Add(new Playercontrol() { Name = q.Name, Points = q.points, Teams = q.teams.ToArray(),
+                                                                                                team0Record = q.teamRecords[q.teams[0]].ToString(), team1Record = q.teamRecords[q.teams[1]].ToString() });
         }
 
         private void GetInProgress() {
@@ -139,14 +141,27 @@ namespace WorldCupQuiniela {
 
             } while (!done);
 
-            foreach (Quinielero q in quinieleros) q.points = 0;
+            foreach (Quinielero q in quinieleros) q.Reset();
             foreach(Fixture f in finished) {
-                if(f.number_goal_team_away == f.number_goal_team_home) {
+                if (f.number_goal_team_away == f.number_goal_team_home)
+                {
                     quinieleros.Where(q => q.teams.Contains(f.team_season_away_name)).First().points += 1;
                     quinieleros.Where(q => q.teams.Contains(f.team_season_home_name)).First().points += 1;
+                    quinieleros.Where(q => q.teams.Contains(f.team_season_away_name)).First().teamRecords[f.team_season_away_name].Tie++;
+                    quinieleros.Where(q => q.teams.Contains(f.team_season_home_name)).First().teamRecords[f.team_season_home_name].Tie++;
                 }
-                else if(f.number_goal_team_away > f.number_goal_team_home) quinieleros.Where(q => q.teams.Contains(f.team_season_away_name)).First().points += 3;
-                else quinieleros.Where(q => q.teams.Contains(f.team_season_home_name)).First().points += 3;
+                else if (f.number_goal_team_away > f.number_goal_team_home)
+                {
+                    quinieleros.Where(q => q.teams.Contains(f.team_season_away_name)).First().points += 3;
+                    quinieleros.Where(q => q.teams.Contains(f.team_season_away_name)).First().teamRecords[f.team_season_away_name].Win++;
+                    quinieleros.Where(q => q.teams.Contains(f.team_season_home_name)).First().teamRecords[f.team_season_home_name].Lose++;
+                }
+                else
+                {
+                    quinieleros.Where(q => q.teams.Contains(f.team_season_home_name)).First().points += 3;
+                    quinieleros.Where(q => q.teams.Contains(f.team_season_home_name)).First().teamRecords[f.team_season_home_name].Win++;
+                    quinieleros.Where(q => q.teams.Contains(f.team_season_away_name)).First().teamRecords[f.team_season_away_name].Lose++;
+                }
             }
         }
     }    

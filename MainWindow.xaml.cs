@@ -30,6 +30,10 @@ namespace WorldCupQuiniela {
             refreshFeedTimer.Tick  += RefreshFeedTimer_Tick;
             quinieleros = JsonConvert.DeserializeObject<List<Quinielero>>(File.ReadAllText("quinieleros.json"));
 
+            client.BaseAddress = new Uri("https://api.sportdeer.com/v1/");
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
             Dispatcher.UnhandledException += Dispatcher_UnhandledException;
         }
 
@@ -110,10 +114,7 @@ namespace WorldCupQuiniela {
         }
 
         private void RefreshToken() {
-            if (!refreshToken) return;
-            client.BaseAddress = new Uri("https://api.sportdeer.com/v1/");
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add( new MediaTypeWithQualityHeaderValue("application/json"));
+            if (!refreshToken) return;            
 
             string request = "accessToken?refresh_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1YjA4NjA0OTQ2MjNjNDU3ZjBjMDA4YjgiLCJpYXQiOjE1MjcyNzU3MTd9.XLxW4EfagQzqODlF6ZPHU3b2w6B88Jiav0zp55cKYW4";
             HttpResponseMessage response = client.GetAsync(request).Result;

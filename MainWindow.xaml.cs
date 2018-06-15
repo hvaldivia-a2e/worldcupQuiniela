@@ -127,8 +127,11 @@ namespace WorldCupQuiniela {
         private void RefreshRanking() {
             CalculatePoints();
             var ordered = quinieleros.OrderByDescending(q => q.points);
+            int currentMaxPoints = ordered.First().points;
+            int totalGames = ordered.First().teams.Count * 3;
             quinielerosGrid.Children.Clear();
             foreach (Quinielero q in ordered) quinielerosGrid.Children.Add(new Playercontrol() { QuinieleroName = q.Name, Points = q.points, Teams = q.teams.ToArray(),
+                                                                                                Eliminated = ((((totalGames - q.playedGames)*3)+q.points) < currentMaxPoints),
                                                                                                 team0Record = q.teamRecords[q.teams[0]].ToString(), team1Record = q.teamRecords[q.teams[1]].ToString() });
         }
 
@@ -167,6 +170,10 @@ namespace WorldCupQuiniela {
 
             foreach (Quinielero q in quinieleros) q.Reset();
             foreach(Fixture f in finished) {
+
+                quinieleros.Where(q => q.teams.Contains(f.team_season_away_name)).First().playedGames++;
+                quinieleros.Where(q => q.teams.Contains(f.team_season_home_name)).First().playedGames++;
+
                 if (f.number_goal_team_away == f.number_goal_team_home)
                 {
                     quinieleros.Where(q => q.teams.Contains(f.team_season_away_name)).First().points += 1;

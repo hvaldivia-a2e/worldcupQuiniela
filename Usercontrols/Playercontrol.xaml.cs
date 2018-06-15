@@ -22,6 +22,7 @@ namespace WorldCupQuiniela.Usercontrols
     public partial class Playercontrol : UserControl
     {
         public string QuinieleroName { get; set; }
+        public bool Eliminated { get; set; }
         public int Points { get; set; }
         public string[] Teams { get; set; }
         public string team0Record { get; set; }
@@ -54,6 +55,8 @@ namespace WorldCupQuiniela.Usercontrols
 
             Team0Record.Content = team0Record;
             Team1Record.Content = team1Record;
+
+            if (Eliminated) this.Opacity = 0.15;
         }
     }
 }

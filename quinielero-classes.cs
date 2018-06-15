@@ -20,7 +20,9 @@ namespace WorldCupQuiniela
         public List<string> teams;
         [DataMember(Name = "points", EmitDefaultValue = false)]
         public int points;
-        [DataMember(Name = "points", EmitDefaultValue = false)]
+        [DataMember(Name = "played_games", EmitDefaultValue = false)]
+        public int playedGames;
+        [DataMember(Name = "team_records", EmitDefaultValue = false)]
         public Dictionary<string, TeamRecord> teamRecords;
 
         public override string ToString()
@@ -29,6 +31,7 @@ namespace WorldCupQuiniela
             sb.Append("class Quinielero {\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  teams: ").Append(string.Join(",", teams)).Append("\n");
+            sb.Append("  played_games: ").Append(playedGames).Append("\n");
             sb.Append("  points: ").Append(points).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -42,6 +45,7 @@ namespace WorldCupQuiniela
         public void Reset()
         {
             points = 0;
+            playedGames = 0;
             if (teamRecords == null) teamRecords = new Dictionary<string, TeamRecord>();
             else teamRecords.Clear();
 

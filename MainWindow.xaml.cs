@@ -22,34 +22,57 @@ namespace WorldCupQuiniela {
         System.Windows.Threading.DispatcherTimer refreshTokenTimer = new System.Windows.Threading.DispatcherTimer();
         System.Windows.Threading.DispatcherTimer refreshFeedTimer  = new System.Windows.Threading.DispatcherTimer();
 
+        public static void UiInvoke(Action a) { Application.Current.Dispatcher.Invoke(a); }
+
         public MainWindow() {
             InitializeComponent(); 
             refreshTokenTimer.Tick += RefreshTokenTimer_Tick;
             refreshFeedTimer.Tick  += RefreshFeedTimer_Tick;
             quinieleros = JsonConvert.DeserializeObject<List<Quinielero>>(File.ReadAllText("quinieleros.json"));
+
+            Dispatcher.UnhandledException += Dispatcher_UnhandledException;
         }
 
-        private void RefreshFeedTimer_Tick(object sender, EventArgs e) { 
-            if (refreshToken) RefreshToken();
-            RefreshFromFeed();
-            if(currentInPlay != inPlay.Count) RefreshRanking();
+        private void Dispatcher_UnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e) {
+
+            // save Exception details in a "crash report" file
+            using (StreamWriter sw = new StreamWriter(String.Format("quiniela-crash-{0}.log", DateTime.Now.ToString("yyyyMMdd-HHmmss")))) {
+                sw.WriteLine("*** Crash! *** - " + DateTime.Now.ToString("yyyy/MM/dd - HH:mm:ss"));
+                sw.WriteLine("Details: " + e.Exception.ToString());
+            }
+
+            e.Handled = true;
+            MessageBox.Show("Unfortunately there has been a problem with your world cup quiniela." +
+                            " Please contact support@hectorsoft.com",
+                            "Score refresh failed!");
+            Application.Current.Shutdown();
+        }
+
+        private void RefreshFeedTimer_Tick(object sender, EventArgs e) {
+            refreshFeedTimer.Stop();
+            RefreshToken();
+            UiInvoke(() => RefreshFromFeed());
+            if (currentInPlay != inPlay.Count) UiInvoke(() => RefreshRanking());
             currentInPlay = inPlay.Count;
-            if (currentInPlay > 0)  refreshFeedTimer.Interval = TimeSpan.FromSeconds(10);
-            else                    refreshFeedTimer.Interval = (upcoming[0].schedule_date.ToLocalTime() - DateTime.Now.ToLocalTime());
+            SetIntervalAndstartTimer();
         }
 
         private void RefreshTokenTimer_Tick(object sender, EventArgs e) { refreshToken = true; refreshTokenTimer.Stop(); }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e) {
-
-            if (refreshToken) RefreshToken();
+        private void Window_Loaded(object sender, RoutedEventArgs e) {            
+            RefreshToken();
             RefreshFromFeed();
             RefreshRanking();
 
             currentInPlay = inPlay.Count;
-            if(inPlay.Count > 0)    refreshFeedTimer.Interval = TimeSpan.FromSeconds(10);
-            else                    refreshFeedTimer.Interval = (upcoming[0].schedule_date.ToLocalTime() - DateTime.Now.ToLocalTime());
+            SetIntervalAndstartTimer();
+        }
 
+        private void SetIntervalAndstartTimer() {
+            DateTime now = DateTime.Now.ToLocalTime();
+            if (currentInPlay > 0 || upcoming.Where(u => u.schedule_date.ToLocalTime() <= now).Count() > 0) refreshFeedTimer.Interval = TimeSpan.FromSeconds(10);
+            else if (upcoming.OrderBy(u => u.schedule_date).FirstOrDefault() != null) refreshFeedTimer.Interval = (upcoming.OrderBy(u => u.schedule_date).First().schedule_date.ToLocalTime() - now);
+            else return;
             refreshFeedTimer.Start();
         }
 
@@ -86,7 +109,8 @@ namespace WorldCupQuiniela {
             }
         }
 
-        void RefreshToken() {
+        private void RefreshToken() {
+            if (!refreshToken) return;
             client.BaseAddress = new Uri("https://api.sportdeer.com/v1/");
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add( new MediaTypeWithQualityHeaderValue("application/json"));
@@ -104,7 +128,7 @@ namespace WorldCupQuiniela {
             CalculatePoints();
             var ordered = quinieleros.OrderByDescending(q => q.points);
             quinielerosGrid.Children.Clear();
-            foreach (Quinielero q in ordered) quinielerosGrid.Children.Add(new Playercontrol() { Name = q.Name, Points = q.points, Teams = q.teams.ToArray(),
+            foreach (Quinielero q in ordered) quinielerosGrid.Children.Add(new Playercontrol() { QuinieleroName = q.Name, Points = q.points, Teams = q.teams.ToArray(),
                                                                                                 team0Record = q.teamRecords[q.teams[0]].ToString(), team1Record = q.teamRecords[q.teams[1]].ToString() });
         }
 

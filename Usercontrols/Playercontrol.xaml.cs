@@ -21,7 +21,7 @@ namespace WorldCupQuiniela.Usercontrols
     /// </summary>
     public partial class Playercontrol : UserControl
     {
-        public string Name { get; set; }
+        public string QuinieleroName { get; set; }
         public int Points { get; set; }
         public string[] Teams { get; set; }
         public string team0Record { get; set; }
@@ -34,7 +34,7 @@ namespace WorldCupQuiniela.Usercontrols
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            lbName.Content = Name;
+            lbName.Content = QuinieleroName;
             lbPoints.Content = Points.ToString();
 
             // put flags there!

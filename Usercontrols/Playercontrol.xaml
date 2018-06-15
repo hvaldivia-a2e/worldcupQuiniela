@@ -33,12 +33,12 @@
                 <DropShadowEffect/>
             </Image.Effect>
         </Image>
-        <Label Content="0-0-0" Margin="321,46,0,0" VerticalAlignment="Top" Height="28" Foreground="#FFEDEDED" FontFamily="Tahoma" HorizontalAlignment="Left" Width="44">
+        <Label x:Name="Team0Record" Content="0-0-0" Margin="321,46,0,0" VerticalAlignment="Top" Height="28" Foreground="#FFEDEDED" FontFamily="Tahoma" HorizontalAlignment="Left" Width="44">
             <Label.Effect>
                 <DropShadowEffect/>
             </Label.Effect>
         </Label>
-        <Label Content="0-0-0" Margin="388,46,0,0" VerticalAlignment="Top" Height="28" Foreground="#FFEDEDED" FontFamily="Tahoma" HorizontalAlignment="Left" Width="43">
+        <Label x:Name="Team1Record" Content="0-0-0" Margin="388,46,0,0" VerticalAlignment="Top" Height="28" Foreground="#FFEDEDED" FontFamily="Tahoma" HorizontalAlignment="Left" Width="43">
             <Label.Effect>
                 <DropShadowEffect/>
             </Label.Effect>

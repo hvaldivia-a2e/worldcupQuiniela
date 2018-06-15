@@ -1,82 +1,82 @@
 [
   {
     "Name": "Luis Sandoval",
-    "teams": [ "South Korea", "Mexico" ],
+    "teams": [ "Colombia", "South Korea" ],
     "points": 0
   },
   {
     "Name": "David Bolaños",
-    "teams": [ "Germany", "Sweden" ],
+    "teams": [ "Germany", "Japan" ],
     "points": 0
   },
   {
     "Name": "Omar Zatarain",
-    "teams": [ "Morocco", "Iran" ],
+    "teams": [ "Tunisia", "Iran" ],
     "points": 0
   },
   {
     "Name": "Ernesto Lopez",
-    "teams": [ "Portugal", "Spain" ],
+    "teams": [ "England", "Sweden" ],
     "points": 0
   },
   {
     "Name": "Jose Nieves",
-    "teams": [ "Japan", "Poland" ],
+    "teams": [ "Spain", "Panama" ],
     "points": 0
   },
   {
     "Name": "Jesus Solis",
-    "teams": [ "Senegal", "Colombia" ],
+    "teams": [ "Switzerland", "Russia" ],
     "points": 11
   },
   {
     "Name": "Juan Antonio",
-    "teams": [ "Argentina", "Iceland" ],
+    "teams": [ "Belgium", "Saudi Arabia" ],
     "points": 9
   },
   {
-    "Name": "Gerardo Ortiz",
-    "teams": [ "Croatia", "Nigeria" ],
+    "Name": "Gerardo Molina",
+    "teams": [ "Poland", "Senegal" ],
     "points": 0
   },
   {
     "Name": "Omar Osuna",
-    "teams": [ "Egypt", "Uruguay" ],
+    "teams": [ "Mexico", "Serbia" ],
     "points": 55
   },
   {
     "Name": "Hector Valdivia",
-    "teams": [ "Russia", "Saudi Arabia" ],
+    "teams": [ "Peru", "Egypt" ],
     "points": 99
   },
   {
     "Name": "Luis Gonzalez",
-    "teams": [ "Australia", "Peru" ],
+    "teams": [ "Portugal", "Nigeria" ],
     "points": 0
   },
   {
     "Name": "Jose Manuel",
-    "teams": [ "Denmark", "France" ],
+    "teams": [ "Brazil", "Australia" ],
     "points": 0
   },
   {
     "Name": "Carlos Lopez",
-    "teams": [ "Belgium", "Panama" ],
+    "teams": [ "France", "Costa Rica" ],
     "points": 0
   },
   {
     "Name": "Gabriel Herrera",
-    "teams": [ "Tunisia", "England" ],
+    "teams": [ "Denmark", "Croatia" ],
     "points": 0
   },
   {
     "Name": "Samara de la Torre",
-    "teams": [ "Costa Rica", "Serbia" ],
+    "teams": [ "Argentina", "Morocco" ],
     "points": 0
   },
   {
     "Name": "Rakesh",
-    "teams": [ "Brazil", "Switzerland" ],
+    "teams": [ "Uruguay", "Iceland" ],
     "points": 0
   },
 ]

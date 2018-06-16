@@ -86,12 +86,13 @@ namespace WorldCupQuiniela {
             fixturesGrid.Children.Clear();
             int fixturesDisplayed = 0;
             foreach(Fixture f in inPlay) {
-                fixturesGrid.Children.Add(new fixtureControl(){
-                    TeamAway    = f.team_season_away_name,
-                    TeamHome    = f.team_season_home_name,
-                    Stadium     = f.stadium,
-                    Score       = string.Format("{0}-{1}", f.number_goal_team_away, f.number_goal_team_home),
-                    Status      = f.fixture_status,
+                fixturesGrid.Children.Add(new fixtureControl() {
+                    TeamAway = f.team_season_away_name,
+                    TeamHome = f.team_season_home_name,
+                    Stadium = f.stadium,
+                    Score = string.Format("{0}-{1}", f.number_goal_team_away, f.number_goal_team_home),
+                    //Status      = f.fixture_status,
+                    Elapsed = f.fixture_status == "Half Time" ? f.fixture_status : string.Format("{0}'", f.elapsed),
                     Width       = 800
                 });
                 if (++fixturesDisplayed == 3) break;

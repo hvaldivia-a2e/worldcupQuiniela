@@ -175,6 +175,8 @@ namespace WorldCupQuiniela
         public string team_season_away_name;
         [DataMember(Name = "team_season_home_name", EmitDefaultValue = false)]
         public string team_season_home_name;
+        [DataMember(Name = "elapsed", EmitDefaultValue = false)]
+        public int elapsed;
 
         public override string ToString()
         {
@@ -185,6 +187,7 @@ namespace WorldCupQuiniela
             sb.Append("  id_league: ").Append(id_league).Append("\n");
             sb.Append("  id_season: ").Append(id_season).Append("\n");
             sb.Append("  id_stage: ").Append(id_stage).Append("\n");
+            sb.Append("  elapsed: ").Append(elapsed).Append("\n");
             sb.Append("  first_half_ended_at: ").Append(first_half_ended_at).Append("\n");
             sb.Append("  fixture_status: ").Append(fixture_status).Append("\n");
             sb.Append("  fixture_status_short: ").Append(fixture_status_short).Append("\n");

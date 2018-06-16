@@ -25,6 +25,7 @@ namespace WorldCupQuiniela.Usercontrols
         public string Stadium { get; set; }
         public string Status { get; set; }
         public string Score { get; set; }
+        public string Elapsed { get; set; }
 
         public fixtureControl()
         {
@@ -38,6 +39,7 @@ namespace WorldCupQuiniela.Usercontrols
             lbScore.Content = Score;
             lbStadium.Content = Stadium;
             lbTimestamp.Content = Status;
+            lbElapsed.Content = Elapsed;
             
 
             // flags!

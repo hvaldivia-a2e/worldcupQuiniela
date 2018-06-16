@@ -42,6 +42,11 @@
                 <DropShadowEffect/>
             </Label.Effect>
         </Label>
+        <Label x:Name="lbElapsed" Content="" Margin="314,74,308,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" Foreground="#FFE7E7E7" FontSize="18" Height="37">
+            <Label.Effect>
+                <DropShadowEffect/>
+            </Label.Effect>
+        </Label>
 
     </Grid>
 </UserControl>

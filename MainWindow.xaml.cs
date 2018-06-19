@@ -53,17 +53,20 @@ namespace WorldCupQuiniela {
         }
 
         private void RefreshFeedTimer_Tick(object sender, EventArgs e) {
-            refreshFeedTimer.Stop();
-            RefreshToken();
-            UiInvoke(() => RefreshFromFeed());
-            if (currentInPlay != inPlay.Count) UiInvoke(() => RefreshRanking());
-            currentInPlay = inPlay.Count;
-            SetIntervalAndstartTimer();
+            try {
+                refreshFeedTimer.Stop();
+                RefreshToken();
+                UiInvoke(() => RefreshFromFeed());
+                if (currentInPlay != inPlay.Count) UiInvoke(() => RefreshRanking());
+                currentInPlay = inPlay.Count;
+                SetIntervalAndstartTimer();
+            }
+            catch { }
         }
 
         private void RefreshTokenTimer_Tick(object sender, EventArgs e) { refreshToken = true; refreshTokenTimer.Stop(); }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e) {            
+        private void Window_Loaded(object sender, RoutedEventArgs e) {
             RefreshToken();
             RefreshFromFeed();
             RefreshRanking();

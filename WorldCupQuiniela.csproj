@@ -65,6 +65,9 @@
     <Compile Include="Usercontrols\Playercontrol.xaml.cs">
       <DependentUpon>Playercontrol.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Winner.xaml.cs">
+      <DependentUpon>Winner.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -82,6 +85,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Usercontrols\Playercontrol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Winner.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -120,6 +127,10 @@
     <Resource Include="background.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="2018_FIFA_World_Cup_Logo-768x843.png" />
+    <Content Include="certificate-back.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="world-cup-Flags\Argentina.GIF">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

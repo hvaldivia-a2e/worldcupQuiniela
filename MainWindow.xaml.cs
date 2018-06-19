@@ -138,6 +138,11 @@ namespace WorldCupQuiniela {
             foreach (Quinielero q in ordered) quinielerosGrid.Children.Add(new Playercontrol() { QuinieleroName = q.Name, Points = q.points, Teams = q.teams.ToArray(),
                                                                                                 Eliminated = ((((totalGames - q.playedGames)*3)+q.points) < currentMaxPoints),
                                                                                                 team0Record = q.teamRecords[q.teams[0]].ToString(), team1Record = q.teamRecords[q.teams[1]].ToString() });
+            // TO DO: add 'eliminated' property to quinielero to determine we have a champion
+            //// show winner
+            //winner dlg = new winner();
+            //dlg.Champ = ordered.First().Name;
+            //dlg.ShowDialog();
         }
 
         private void GetInProgress() {

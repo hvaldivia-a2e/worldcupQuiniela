@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Diagnostics;
 
 namespace WorldCupQuiniela {
 
@@ -131,18 +132,41 @@ namespace WorldCupQuiniela {
 
         private void RefreshRanking() {
             CalculatePoints();
-            var ordered = quinieleros.OrderByDescending(q => q.points);
+            var ordered = quinieleros.OrderByDescending(q => q.points).ThenByDescending(q => q.goalsScored).ThenBy(q => q.goalsReceived).ThenByDescending(q => q.gamesWon);
+            var champ   = ordered.First();
             int currentMaxPoints = ordered.First().points;
             int totalGames = ordered.First().teams.Count * 3;
             quinielerosGrid.Children.Clear();
-            foreach (Quinielero q in ordered) quinielerosGrid.Children.Add(new Playercontrol() { QuinieleroName = q.Name, Points = q.points, Teams = q.teams.ToArray(),
-                                                                                                Eliminated = ((((totalGames - q.playedGames)*3)+q.points) < currentMaxPoints),
-                                                                                                team0Record = q.teamRecords[q.teams[0]].ToString(), team1Record = q.teamRecords[q.teams[1]].ToString() });
-            // TO DO: add 'eliminated' property to quinielero to determine we have a champion
-            //// show winner
-            //winner dlg = new winner();
-            //dlg.Champ = ordered.First().Name;
-            //dlg.ShowDialog();
+            foreach (Quinielero q in ordered) {
+                q.eliminated = ((((totalGames - q.playedGames) * 3) + q.points) < currentMaxPoints);
+                // check for tie
+                if (((((totalGames - q.playedGames) * 3) + q.points) == currentMaxPoints)) q.eliminated = (q.goalsScored < champ.goalsScored || q.goalsReceived > champ.goalsReceived || q.gamesWon < champ.gamesWon);
+                quinielerosGrid.Children.Add(new Playercontrol() {
+                    QuinieleroName = q.Name,
+                    Points = q.points,
+                    Teams = q.teams.ToArray(),
+                    Eliminated = q.eliminated,
+                    team0Record = q.teamRecords[q.teams[0]].ToString(),
+                    team1Record = q.teamRecords[q.teams[1]].ToString(),
+                    GoalsScored = q.goalsScored,
+                    GoalsReceived = q.goalsReceived,
+                    GamesWon = q.gamesWon,
+                });
+            }
+
+            elProgreso.Value = ordered.Sum(q => q.playedGames);
+            elProgreso.Maximum = 32 * 3;
+
+            if( ordered.Where(q => q.eliminated == true).Count() == (ordered.Count() -1)) {
+                // show winner
+                winner dlg = new winner { Champ = ordered.First().Name };
+                dlg.ShowDialog();
+            }  
+            else if( elProgreso.Value == elProgreso.Maximum )
+            {
+                CoinToss dlg = new CoinToss();
+                dlg.ShowDialog();
+            }
         }
 
         private void GetInProgress() {
@@ -184,6 +208,12 @@ namespace WorldCupQuiniela {
                 quinieleros.Where(q => q.teams.Contains(f.team_season_away_name)).First().playedGames++;
                 quinieleros.Where(q => q.teams.Contains(f.team_season_home_name)).First().playedGames++;
 
+                quinieleros.Where(q => q.teams.Contains(f.team_season_away_name)).First().goalsScored += f.number_goal_team_away;
+                quinieleros.Where(q => q.teams.Contains(f.team_season_home_name)).First().goalsScored += f.number_goal_team_home;
+
+                quinieleros.Where(q => q.teams.Contains(f.team_season_away_name)).First().goalsReceived += f.number_goal_team_home;
+                quinieleros.Where(q => q.teams.Contains(f.team_season_home_name)).First().goalsReceived += f.number_goal_team_away;
+
                 if (f.number_goal_team_away == f.number_goal_team_home)
                 {
                     quinieleros.Where(q => q.teams.Contains(f.team_season_away_name)).First().points += 1;
@@ -194,16 +224,23 @@ namespace WorldCupQuiniela {
                 else if (f.number_goal_team_away > f.number_goal_team_home)
                 {
                     quinieleros.Where(q => q.teams.Contains(f.team_season_away_name)).First().points += 3;
+                    quinieleros.Where(q => q.teams.Contains(f.team_season_away_name)).First().gamesWon++;
                     quinieleros.Where(q => q.teams.Contains(f.team_season_away_name)).First().teamRecords[f.team_season_away_name].Win++;
                     quinieleros.Where(q => q.teams.Contains(f.team_season_home_name)).First().teamRecords[f.team_season_home_name].Lose++;
                 }
                 else
                 {
                     quinieleros.Where(q => q.teams.Contains(f.team_season_home_name)).First().points += 3;
+                    quinieleros.Where(q => q.teams.Contains(f.team_season_home_name)).First().gamesWon++;
                     quinieleros.Where(q => q.teams.Contains(f.team_season_home_name)).First().teamRecords[f.team_season_home_name].Win++;
                     quinieleros.Where(q => q.teams.Contains(f.team_season_away_name)).First().teamRecords[f.team_season_away_name].Lose++;
                 }
             }
+        }
+
+        private void Label_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            Process.Start("rules.pdf");
         }
     }    
 }

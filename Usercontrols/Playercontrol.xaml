@@ -43,7 +43,21 @@
                 <DropShadowEffect/>
             </Label.Effect>
         </Label>
-
+        <Label x:Name="lbGF" Content="" Margin="0,1,31.667,0" VerticalAlignment="Top" Height="24" Foreground="#FF71EA69" FontFamily="Tahoma" FontSize="12" HorizontalAlignment="Right" Width="44">
+            <Label.Effect>
+                <DropShadowEffect/>
+            </Label.Effect>
+        </Label>
+        <Label x:Name="lbGC" Content="" Margin="0,23,31.667,0" VerticalAlignment="Top" Height="24" Foreground="#FFE0D524" FontFamily="Tahoma" FontSize="12" HorizontalAlignment="Right" Width="44">
+            <Label.Effect>
+                <DropShadowEffect/>
+            </Label.Effect>
+        </Label>
+        <Label x:Name="lbGW" Content="" Margin="0,45,31.667,0" VerticalAlignment="Top" Height="24" Foreground="White" FontFamily="Tahoma" FontSize="12" HorizontalAlignment="Right" Width="44">
+            <Label.Effect>
+                <DropShadowEffect/>
+            </Label.Effect>
+        </Label>
 
     </Grid>
 </UserControl>

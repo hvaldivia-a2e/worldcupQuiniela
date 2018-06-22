@@ -58,6 +58,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CoinToss.xaml.cs">
+      <DependentUpon>CoinToss.xaml</DependentUpon>
+    </Compile>
     <Compile Include="quinielero-classes.cs" />
     <Compile Include="Usercontrols\fixtureControl.xaml.cs">
       <DependentUpon>fixtureControl.xaml</DependentUpon>
@@ -68,6 +71,10 @@
     <Compile Include="Winner.xaml.cs">
       <DependentUpon>Winner.xaml</DependentUpon>
     </Compile>
+    <Page Include="CoinToss.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -119,6 +126,9 @@
     <None Include="quinieleros.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Content Include="rules.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

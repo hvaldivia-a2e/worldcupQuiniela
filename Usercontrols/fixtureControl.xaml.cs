@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.IO;
 
 namespace WorldCupQuiniela.Usercontrols
 {
@@ -40,22 +41,26 @@ namespace WorldCupQuiniela.Usercontrols
             lbStadium.Content = Stadium;
             lbTimestamp.Content = Status;
             lbElapsed.Content = Elapsed;
-            
+
 
             // flags!
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.CacheOption = BitmapCacheOption.OnLoad;
-            image.UriSource = new Uri(System.IO.Path.GetFullPath(string.Format("./world-cup-flags/{0}.gif", TeamAway)));
-            image.EndInit();
-            imgTeamAway.Source = image;
+            if (File.Exists(System.IO.Path.GetFullPath(string.Format("./world-cup-flags/{0}.gif", TeamAway)))) {
+                BitmapImage image = new BitmapImage();
+                image.BeginInit();
+                image.CacheOption = BitmapCacheOption.OnLoad;
+                image.UriSource = new Uri(System.IO.Path.GetFullPath(string.Format("./world-cup-flags/{0}.gif", TeamAway)));
+                image.EndInit();
+                imgTeamAway.Source = image;
+            }
 
-            image = new BitmapImage();
-            image.BeginInit();
-            image.CacheOption = BitmapCacheOption.OnLoad;
-            image.UriSource = new Uri(System.IO.Path.GetFullPath(string.Format("./world-cup-flags/{0}.gif", TeamHome)));
-            image.EndInit();
-            imgTeamHome.Source = image;
+            if (File.Exists(System.IO.Path.GetFullPath(string.Format("./world-cup-flags/{0}.gif", TeamHome)))) {
+                BitmapImage image = new BitmapImage();
+                image.BeginInit();
+                image.CacheOption = BitmapCacheOption.OnLoad;
+                image.UriSource = new Uri(System.IO.Path.GetFullPath(string.Format("./world-cup-flags/{0}.gif", TeamHome)));
+                image.EndInit();
+                imgTeamHome.Source = image;
+            }
         }
     }
 }

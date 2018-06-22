@@ -24,6 +24,9 @@ namespace WorldCupQuiniela.Usercontrols
         public string QuinieleroName { get; set; }
         public bool Eliminated { get; set; }
         public int Points { get; set; }
+        public int GoalsScored { get; set; }
+        public int GoalsReceived { get; set; }
+        public int GamesWon { get; set; }
         public string[] Teams { get; set; }
         public string team0Record { get; set; }
         public string team1Record { get; set; }
@@ -37,6 +40,9 @@ namespace WorldCupQuiniela.Usercontrols
         {
             lbName.Content = QuinieleroName;
             lbPoints.Content = Points.ToString();
+            lbGF.Content = "GF " + GoalsScored.ToString();
+            lbGC.Content = "GA " + GoalsReceived.ToString();
+            lbGW.Content = "W  " + GamesWon.ToString();
 
             // put flags there!
             BitmapImage image = new BitmapImage();

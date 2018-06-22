@@ -8,12 +8,14 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="1080" Width="1920" Background="Black" Loaded="Window_Loaded" WindowStyle="None" WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Grid>
-        <UniformGrid x:Name="quinielerosGrid" Columns="1" Margin="0,0,0,-0.333" HorizontalAlignment="Left" Width="569">
+        <UniformGrid x:Name="quinielerosGrid" Columns="1" Margin="0,0,0,-0.667" HorizontalAlignment="Left" Width="628">
         </UniformGrid>
-        <UniformGrid x:Name="fixturesGrid" Columns="1" Margin="589,0,0.333,-0.333">
+        <UniformGrid x:Name="fixturesGrid" Columns="1" Margin="633,0,0.333,40.333">
             <UniformGrid.Background>
                 <ImageBrush ImageSource="background.jpg"/>
             </UniformGrid.Background>
         </UniformGrid>
+        <ProgressBar x:Name="elProgreso" Margin="633,0,113.333,10.333" Background="#FF252525" Foreground="#FF3479AD" Height="25" VerticalAlignment="Bottom"/>
+        <Label Content="Official Rules" Margin="0,0,10.333,10.333" VerticalAlignment="Bottom" Height="25" HorizontalAlignment="Right" Width="98" Foreground="#FFF9F9F9" FontSize="14" MouseDown="Label_MouseDown" Cursor="Hand"/>
     </Grid>
 </Window>

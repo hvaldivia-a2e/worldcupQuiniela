@@ -18,10 +18,18 @@ namespace WorldCupQuiniela
         public string Name;
         [DataMember(Name = "teams", EmitDefaultValue = false)]
         public List<string> teams;
+        [DataMember(Name = "games_won", EmitDefaultValue = false)]
+        public int gamesWon;
         [DataMember(Name = "points", EmitDefaultValue = false)]
         public int points;
+        [DataMember(Name = "goals_scored", EmitDefaultValue = false)]
+        public int goalsScored;
+        [DataMember(Name = "goals_received", EmitDefaultValue = false)]
+        public int goalsReceived;
         [DataMember(Name = "played_games", EmitDefaultValue = false)]
         public int playedGames;
+        [DataMember(Name = "eliminated", EmitDefaultValue = false)]
+        public bool eliminated;
         [DataMember(Name = "team_records", EmitDefaultValue = false)]
         public Dictionary<string, TeamRecord> teamRecords;
 
@@ -32,6 +40,7 @@ namespace WorldCupQuiniela
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  teams: ").Append(string.Join(",", teams)).Append("\n");
             sb.Append("  played_games: ").Append(playedGames).Append("\n");
+            sb.Append("  eliminated: ").Append(eliminated).Append("\n");
             sb.Append("  points: ").Append(points).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -44,8 +53,12 @@ namespace WorldCupQuiniela
 
         public void Reset()
         {
-            points = 0;
-            playedGames = 0;
+            points          = 0;
+            playedGames     = 0;
+            eliminated      = false;
+            goalsScored     = 0;
+            goalsReceived   = 0;
+            gamesWon        = 0;
             if (teamRecords == null) teamRecords = new Dictionary<string, TeamRecord>();
             else teamRecords.Clear();
 

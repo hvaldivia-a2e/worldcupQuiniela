@@ -6,7 +6,7 @@ Add some nice text explaining why this is important and what we need to do movin
 ---
 |Setting|Current Value|
 |-------|-------------|
-|[AccessModifierOffset](###AccessModifierOffset)|-1|
+|[AccessModifierOffset](#AccessModifierOffset)|-1|
 |[AlignAfterOpenBracket](###AlignAfterOpenBracket)|AlwaysBreak|
 |[AlignConsecutiveAssignments](###AlignConsecutiveAssignments)|false|
 |[AlignConsecutiveDeclarations](###AlignConsecutiveDeclarations)|false|
